@@ -1,0 +1,114 @@
+[0.000000] (-) TimerEvent: {}
+[0.004330] (test_package) JobQueued: {'identifier': 'test_package', 'dependencies': OrderedDict()}
+[0.004401] (test_package) JobStarted: {'identifier': 'test_package'}
+[0.100171] (-) TimerEvent: {}
+[0.203069] (-) TimerEvent: {}
+[0.305249] (-) TimerEvent: {}
+[0.407554] (-) TimerEvent: {}
+[0.515056] (-) TimerEvent: {}
+[0.615575] (-) TimerEvent: {}
+[0.719995] (-) TimerEvent: {}
+[0.821318] (-) TimerEvent: {}
+[0.950727] (-) TimerEvent: {}
+[1.054070] (-) TimerEvent: {}
+[1.155461] (-) TimerEvent: {}
+[1.257238] (-) TimerEvent: {}
+[1.362726] (-) TimerEvent: {}
+[1.466162] (-) TimerEvent: {}
+[1.568780] (-) TimerEvent: {}
+[1.673534] (-) TimerEvent: {}
+[1.774297] (-) TimerEvent: {}
+[1.875575] (-) TimerEvent: {}
+[2.016733] (-) TimerEvent: {}
+[2.124074] (-) TimerEvent: {}
+[2.226145] (-) TimerEvent: {}
+[2.327668] (-) TimerEvent: {}
+[2.429153] (-) TimerEvent: {}
+[2.532146] (-) TimerEvent: {}
+[2.633899] (-) TimerEvent: {}
+[2.734891] (-) TimerEvent: {}
+[2.840865] (-) TimerEvent: {}
+[2.941887] (-) TimerEvent: {}
+[3.044430] (-) TimerEvent: {}
+[3.146001] (-) TimerEvent: {}
+[3.247470] (-) TimerEvent: {}
+[3.349233] (-) TimerEvent: {}
+[3.452433] (-) TimerEvent: {}
+[3.555190] (-) TimerEvent: {}
+[3.656511] (-) TimerEvent: {}
+[3.758109] (-) TimerEvent: {}
+[3.860532] (-) TimerEvent: {}
+[3.963013] (-) TimerEvent: {}
+[4.064479] (-) TimerEvent: {}
+[4.167657] (-) TimerEvent: {}
+[4.271362] (-) TimerEvent: {}
+[4.384967] (-) TimerEvent: {}
+[4.487533] (-) TimerEvent: {}
+[4.589521] (-) TimerEvent: {}
+[4.691089] (-) TimerEvent: {}
+[4.793360] (-) TimerEvent: {}
+[4.895045] (-) TimerEvent: {}
+[4.998021] (-) TimerEvent: {}
+[5.101165] (-) TimerEvent: {}
+[5.204187] (-) TimerEvent: {}
+[5.210234] (test_package) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/test_package', 'build', '--build-base', '/home/porterclev/ros2-ws-2025/build/test_package/build', 'install', '--record', '/home/porterclev/ros2-ws-2025/build/test_package/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/porterclev/ros2-ws-2025/src/test_package', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'porterclev', 'SSH_CLIENT': '192.168.0.103 61414 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/x86_64-linux-gnu:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/porterclev', 'OLDPWD': '/home/porterclev/ros2-ws-2025/src', 'SSH_TTY': '/dev/pts/0', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'porterclev', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '1', 'PATH': '/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'en_US.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'AMENT_PREFIX_PATH': '/opt/ros/jazzy', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/porterclev/ros2-ws-2025/build/test_package', 'LC_ALL': 'en_US.UTF-8', 'SSH_CONNECTION': '192.168.0.103 61414 192.168.0.104 22', 'XDG_DATA_DIRS': '/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/porterclev/ros2-ws-2025/build/test_package/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/porterclev/ros2-ws-2025/install/test_package/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor'}, 'shell': False}
+[5.304631] (-) TimerEvent: {}
+[5.410274] (-) TimerEvent: {}
+[5.515186] (-) TimerEvent: {}
+[5.619036] (-) TimerEvent: {}
+[5.721352] (-) TimerEvent: {}
+[5.825096] (-) TimerEvent: {}
+[5.927975] (-) TimerEvent: {}
+[6.042096] (-) TimerEvent: {}
+[6.147342] (-) TimerEvent: {}
+[6.252427] (-) TimerEvent: {}
+[6.353636] (-) TimerEvent: {}
+[6.458217] (-) TimerEvent: {}
+[6.560797] (-) TimerEvent: {}
+[6.564538] (test_package) StdoutLine: {'line': b'running egg_info\n'}
+[6.564918] (test_package) StdoutLine: {'line': b'creating ../../build/test_package/test_package.egg-info\n'}
+[6.652255] (test_package) StdoutLine: {'line': b'writing ../../build/test_package/test_package.egg-info/PKG-INFO\n'}
+[6.652533] (test_package) StdoutLine: {'line': b'writing dependency_links to ../../build/test_package/test_package.egg-info/dependency_links.txt\n'}
+[6.652714] (test_package) StdoutLine: {'line': b'writing requirements to ../../build/test_package/test_package.egg-info/requires.txt\n'}
+[6.652819] (test_package) StdoutLine: {'line': b'writing top-level names to ../../build/test_package/test_package.egg-info/top_level.txt\n'}
+[6.652951] (test_package) StdoutLine: {'line': b"writing manifest file '../../build/test_package/test_package.egg-info/SOURCES.txt'\n"}
+[6.662712] (-) TimerEvent: {}
+[6.764117] (-) TimerEvent: {}
+[6.801632] (test_package) StdoutLine: {'line': b"reading manifest file '../../build/test_package/test_package.egg-info/SOURCES.txt'\n"}
+[6.803372] (test_package) StdoutLine: {'line': b"adding license file 'LICENSE'\n"}
+[6.805645] (test_package) StdoutLine: {'line': b"writing manifest file '../../build/test_package/test_package.egg-info/SOURCES.txt'\n"}
+[6.807544] (test_package) StdoutLine: {'line': b'running build\n'}
+[6.807791] (test_package) StdoutLine: {'line': b'running build_py\n'}
+[6.808385] (test_package) StdoutLine: {'line': b'creating /home/porterclev/ros2-ws-2025/build/test_package/build\n'}
+[6.810261] (test_package) StdoutLine: {'line': b'creating /home/porterclev/ros2-ws-2025/build/test_package/build/lib\n'}
+[6.810538] (test_package) StdoutLine: {'line': b'creating /home/porterclev/ros2-ws-2025/build/test_package/build/lib/test_package\n'}
+[6.810716] (test_package) StdoutLine: {'line': b'copying test_package/__init__.py -> /home/porterclev/ros2-ws-2025/build/test_package/build/lib/test_package\n'}
+[6.812471] (test_package) StdoutLine: {'line': b'running install\n'}
+[6.835167] (test_package) StdoutLine: {'line': b'running install_lib\n'}
+[6.866357] (-) TimerEvent: {}
+[6.924225] (test_package) StdoutLine: {'line': b'creating /home/porterclev/ros2-ws-2025/install/test_package/lib/python3.12/site-packages/test_package\n'}
+[6.925845] (test_package) StdoutLine: {'line': b'copying /home/porterclev/ros2-ws-2025/build/test_package/build/lib/test_package/__init__.py -> /home/porterclev/ros2-ws-2025/install/test_package/lib/python3.12/site-packages/test_package\n'}
+[6.931027] (test_package) StdoutLine: {'line': b'byte-compiling /home/porterclev/ros2-ws-2025/install/test_package/lib/python3.12/site-packages/test_package/__init__.py to __init__.cpython-312.pyc\n'}
+[6.931275] (test_package) StdoutLine: {'line': b'running install_data\n'}
+[6.931388] (test_package) StdoutLine: {'line': b'creating /home/porterclev/ros2-ws-2025/install/test_package/share/ament_index\n'}
+[6.931657] (test_package) StdoutLine: {'line': b'creating /home/porterclev/ros2-ws-2025/install/test_package/share/ament_index/resource_index\n'}
+[6.931794] (test_package) StdoutLine: {'line': b'creating /home/porterclev/ros2-ws-2025/install/test_package/share/ament_index/resource_index/packages\n'}
+[6.936076] (test_package) StdoutLine: {'line': b'copying resource/test_package -> /home/porterclev/ros2-ws-2025/install/test_package/share/ament_index/resource_index/packages\n'}
+[6.936428] (test_package) StdoutLine: {'line': b'copying package.xml -> /home/porterclev/ros2-ws-2025/install/test_package/share/test_package\n'}
+[6.936628] (test_package) StdoutLine: {'line': b'running install_egg_info\n'}
+[6.967909] (-) TimerEvent: {}
+[7.041721] (test_package) StdoutLine: {'line': b'Copying ../../build/test_package/test_package.egg-info to /home/porterclev/ros2-ws-2025/install/test_package/lib/python3.12/site-packages/test_package-0.0.0-py3.12.egg-info\n'}
+[7.048721] (test_package) StdoutLine: {'line': b'running install_scripts\n'}
+[7.071599] (-) TimerEvent: {}
+[7.173915] (-) TimerEvent: {}
+[7.278148] (-) TimerEvent: {}
+[7.380846] (-) TimerEvent: {}
+[7.484442] (-) TimerEvent: {}
+[7.585717] (-) TimerEvent: {}
+[7.690085] (-) TimerEvent: {}
+[7.759499] (test_package) StdoutLine: {'line': b"writing list of installed files to '/home/porterclev/ros2-ws-2025/build/test_package/install.log'\n"}
+[7.793069] (-) TimerEvent: {}
+[7.908192] (test_package) CommandEnded: {'returncode': 0}
+[7.909623] (-) TimerEvent: {}
+[7.996606] (test_package) JobEnded: {'identifier': 'test_package', 'rc': 0}
+[8.002502] (-) EventReactorShutdown: {}
