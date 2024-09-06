@@ -1,1 +1,1 @@
-can:rclpy:std_msgs
+python3-can:rclpy:std_msgs

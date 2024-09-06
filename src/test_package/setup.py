@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'can_talk = test_package.can_test:main',
+            'mini_joy = test_package.mini_joy:main'
         ],
     },
 )
