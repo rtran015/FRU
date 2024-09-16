@@ -25,39 +25,30 @@ class MiniJoy(Node):
 
     def listener_callback(self, msg: Joy):
         uint8 = UInt8()
-        # Left Stick Maps - Left Drive Train
+
         if msg.axes[1] > self.DEADBAND: # L Stick Up 
-            uint8.data = int((msg.axes[1] * self.speed_limit)) # 1-100 to indicate forward motion
+            uint8.data = 50 - int(msg.axes[1] * self.speed_limit) # add 100 to indicate forward motion and not include 100
             self.dt_l_publisher_.publish(uint8)
-
         elif msg.axes[1] < -self.DEADBAND: # L Stick Down 
-            uint8.data = int((abs(msg.axes[1]) * self.speed_limit) + 100) # 101-200 so backward movement
-            #bug where if its too small it will round down and crank speed to 100%
-            if uint8.data == 100:
-                uint8.data = 0
+            uint8.data = 50 + int(abs(msg.axes[1]) * self.speed_limit) # subtract 1 to no include 100 
             self.dt_l_publisher_.publish(uint8)
-
         else:
-            uint8.data = 0 # deadband resets it to neutral
+            uint8.data = 50 # deadband resets it to neutral
             self.dt_l_publisher_.publish(uint8)
 
         # Right Stick Maps - Right Drive Train
         if msg.axes[3] > self.DEADBAND: # R Stick Up
-            uint8.data = int((msg.axes[3] * self.speed_limit)) # add 100 to indicate forward motion and not include 100
+            uint8.data = 50 + int((msg.axes[3] * self.speed_limit)) 
             self.dt_r_publisher_.publish(uint8)
-
         elif msg.axes[3] < -self.DEADBAND: # R Stick Down
-            uint8.data = int((abs(msg.axes[3]) * self.speed_limit) + 100) # 101-200 so backwards
-            #bug where if its too small it will round down and crank speed to 100%
-            if uint8.data == 100:
-                uint8.data = 0
+            uint8.data = 50 - int((abs(msg.axes[3]) * self.speed_limit)) 
             self.dt_r_publisher_.publish(uint8)
-            
         else:
-            uint8.data = 0 # deadband resets it to neutral
-            self.dt_r_publisher_.publish(uint8)
+            uint8.data = 50 # deadband resets it to neutral
+            self.dt_r_publisher_.publish(uint8)    
 
 def main(args=None):
+    print("Joystick Live")
     rclpy.init(args=args)
 
     mini_joy = MiniJoy()

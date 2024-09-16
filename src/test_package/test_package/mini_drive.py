@@ -12,9 +12,6 @@ class MiniDrivetrain(Node):
         self.dt_left_sub = self.create_subscription(UInt8, 'dt_left', self.left_update, 10)
         self.dt_right_sub = self.create_subscription(UInt8, 'dt_right', self.right_update, 10)
 
-        # drivetrain periodic
-        self.drivetrain_timer = self.create_timer(0.1, self.drivetrain_periodic)
-
         # create state variables, these keep track of what motors should be running and how fast at the current moment
         self.dt_left_speed = 0
         self.dt_right_speed = 0  
@@ -68,30 +65,28 @@ class MiniDrivetrain(Node):
 
     #updates the states of the left drivetrain motors
     def left_update(self, msg):
-        # checks if speed is different then previous message published
-        if self.dt_left_speed == msg.data:     
-            return None
+         # checks if speed is different then previous message published
+        if self.dt_left_speed == msg.data:
+            return None  
         self.dt_left_speed = msg.data
+
+        temp_data = self.signal_conversion(self.dt_left_speed, 8, 30)  
+        # can message for right and left motor
+        self.can_publish(115, temp_data, True) 
+        self.can_publish(116, temp_data, True) 
 
 
     #updates the states of the right drivetrains motors
     def right_update(self, msg):
         # checks if speed is different then previous message published
         if self.dt_right_speed == msg.data:
-            return None
+            return None         
         self.dt_right_speed = msg.data
 
-    # for publishing the drivetrain can messages to the vescs
-    def drivetrain_periodic(self):
-        temp_data = self.signal_conversion(self.dt_left_speed, 4, 1000)  # Has to be 4 to work on vesc
-        # can message for right and left motor
-        self.can_publish(15, temp_data, True)
-        self.can_publish(16, temp_data, True) 
-
         # converts controller signal to bytes array
-        temp_data = self.signal_conversion(self.dt_right_speed, 4, 1000)  # Has to be 4 to work on vesc
-        self.can_publish(17, temp_data, True)
-        self.can_publish(18, temp_data, True)
+        temp_data = self.signal_conversion(self.dt_right_speed, 8, 20)  
+        self.can_publish(117, temp_data, True) 
+        self.can_publish(118, temp_data, True)
 
 def main(args=None):
     print("Drive Live")
