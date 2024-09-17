@@ -20,17 +20,18 @@ class MiniJoy(Node):
 			10)
 
         # Constants
-        self.speed_limit = 10 # Scalar value for keeping the bot in the right speed range
+        self.speed_limit_left = 7.9 # Scalar value for keeping the bot in the right speed range
+        self.speed_limit_right = 10
         self.DEADBAND = 0.05 #the size of the deadband for the controller to ignore inputs
 
     def listener_callback(self, msg: Joy):
         uint8 = UInt8()
 
         if msg.axes[1] > self.DEADBAND: # L Stick Up 
-            uint8.data = 50 - int(msg.axes[1] * self.speed_limit) # add 100 to indicate forward motion and not include 100
+            uint8.data = 50 + int(msg.axes[1] * self.speed_limit_left) # add 100 to indicate forward motion and not include 100
             self.dt_l_publisher_.publish(uint8)
         elif msg.axes[1] < -self.DEADBAND: # L Stick Down 
-            uint8.data = 50 + int(abs(msg.axes[1]) * self.speed_limit) # subtract 1 to no include 100 
+            uint8.data = 50 - int(abs(msg.axes[1]) * self.speed_limit_left) # subtract 1 to no include 100 
             self.dt_l_publisher_.publish(uint8)
         else:
             uint8.data = 50 # deadband resets it to neutral
@@ -38,10 +39,10 @@ class MiniJoy(Node):
 
         # Right Stick Maps - Right Drive Train
         if msg.axes[3] > self.DEADBAND: # R Stick Up
-            uint8.data = 50 + int((msg.axes[3] * self.speed_limit)) 
+            uint8.data = 50 - int((msg.axes[3] * self.speed_limit_right)) 
             self.dt_r_publisher_.publish(uint8)
         elif msg.axes[3] < -self.DEADBAND: # R Stick Down
-            uint8.data = 50 - int((abs(msg.axes[3]) * self.speed_limit)) 
+            uint8.data = 50 + int((abs(msg.axes[3]) * self.speed_limit_right)) 
             self.dt_r_publisher_.publish(uint8)
         else:
             uint8.data = 50 # deadband resets it to neutral

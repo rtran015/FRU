@@ -17,7 +17,7 @@ class MiniDrivetrain(Node):
         self.dt_right_speed = 0  
 
         # can bust initialization
-        self.bus = can.interface.Bus(interface='socketcan', channel='vcan0', bitrate='50000')
+        self.bus = can.interface.Bus(interface='socketcan', channel='can0', bitrate='50000')
 
     # converts the input integer into a list of Hex grouped by every 2 hex digits, stored as integers from 0-255
     def signal_conversion(self, msg_data: int, bytes_range: int, frequency_floor: int) -> list[int]:
@@ -84,7 +84,7 @@ class MiniDrivetrain(Node):
         self.dt_right_speed = msg.data
 
         # converts controller signal to bytes array
-        temp_data = self.signal_conversion(self.dt_right_speed, 8, 20)  
+        temp_data = self.signal_conversion(self.dt_right_speed, 8, 30)  
         self.can_publish(117, temp_data, True) 
         self.can_publish(118, temp_data, True)
 
