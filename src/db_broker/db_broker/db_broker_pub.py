@@ -82,6 +82,9 @@ class DB_Broker(Node):
         return client 
 
     def sensor_update(self, msg):
+        temp_id = "0x%0.2X" % msg.data[0]
+        if int(temp_id[len(temp_id) - 2::], 16) != self.can_id:
+            return
         if msg.data[0] not in self.sensorData.keys():
             self.sensorData.update({msg.data[0]: [0 for i in range(10)]})
         self.sensorData[msg.data[0]][msg.data[1]] = msg.data[2]
