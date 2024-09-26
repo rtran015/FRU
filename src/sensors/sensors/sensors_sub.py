@@ -10,11 +10,11 @@ class SensorSub(Node):
         super().__init__('sensors_sub')
 
         filters=[
-                {"can_id": 0x0000090F, "can_mask": 0x1FFFFFFF, "extended": True},
-                {"can_id": 0x00000E0F, "can_mask": 0x1FFFFFFF, "extended": True},
-                {"can_id": 0x00000F0F, "can_mask": 0x1FFFFFFF, "extended": True},
-                {"can_id": 0x0000100F, "can_mask": 0x1FFFFFFF, "extended": True},
-                {"can_id": 0x00001B0F, "can_mask": 0x1FFFFFFF, "extended": True}
+                {"can_id": 0x00000900, "can_mask": 0x1FFFFF00, "extended": True},
+                {"can_id": 0x00000E00, "can_mask": 0x1FFFFF00, "extended": True},
+                {"can_id": 0x00000F00, "can_mask": 0x1FFFFF00, "extended": True},
+                {"can_id": 0x00001000, "can_mask": 0x1FFFFF00, "extended": True},
+                {"can_id": 0x00001B00, "can_mask": 0x1FFFFF00, "extended": True}
         ]
         # Standard CAN
         self.bus = can.interface.Bus(interface='socketcan', channel='can0', bitrate='500000', can_filters=filters)
@@ -27,8 +27,8 @@ class SensorSub(Node):
         msg = self.bus.recv()
         # self.get_logger().info(f'Id: {msg.arbitration_id}, Time: {msg.timestamp}, Data: {msg.data}')
         
-        match msg.arbitration_id:
-            case 2319:
+        match msg.arbitration_id >> 8:
+            case 9:
                 #self.get_logger().info('rpm')
                 d = int.from_bytes(msg.data[0:4] , byteorder='big', signed=True)
                 num = Int32MultiArray()
@@ -47,7 +47,7 @@ class SensorSub(Node):
                 self.vesc1_publisher_.publish(num)
 
 
-            case 3599:
+            case 14:
                 #self.get_logger().info('amp')
                 num = Int32MultiArray()
 
@@ -59,7 +59,7 @@ class SensorSub(Node):
                 num.data = [msg.arbitration_id, 1, d]
                 self.vesc1_publisher_.publish(num)
 
-            case 3855:
+            case 15:
                 #self.get_logger().info('watt')
                 num = Int32MultiArray()
 
@@ -71,7 +71,7 @@ class SensorSub(Node):
                 num.data = [msg.arbitration_id, 1, d]
                 self.vesc1_publisher_.publish(num)
 
-            case 4111:
+            case 16:
                 #self.get_logger().info('temp')
                 num = Int32MultiArray()
 
@@ -91,7 +91,7 @@ class SensorSub(Node):
                 num.data = [msg.arbitration_id, 3, d]
                 self.vesc1_publisher_.publish(num)
             
-            case 6927:
+            case 27:
                 #self.get_logger().info('speed')
                 num = Int32MultiArray()
 
