@@ -4,11 +4,11 @@ from launch_ros.actions import Node
 def generate_launch_description():
     return LaunchDescription([
         Node(
-            package='sensors',
-            executable='sensor',
+            package='test_package',
+            executable='main_joy',
         ),
         Node(
-            package='db_broker',
-            executable='broker'
+            package='test_package',
+            executable='main_drive'
         ),
     ])

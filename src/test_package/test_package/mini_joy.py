@@ -20,8 +20,8 @@ class MiniJoy(Node):
 			10)
 
         # Constants
-        self.speed_limit_left = 7.9 # Scalar value for keeping the bot in the right speed range
-        self.speed_limit_right = 10
+        self.speed_limit_left = 7.9 * 2 # Scalar value for keeping the bot in the right speed range
+        self.speed_limit_right = 10 * 2
         self.DEADBAND = 0.05 #the size of the deadband for the controller to ignore inputs
 
     def listener_callback(self, msg: Joy):

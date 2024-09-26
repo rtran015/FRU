@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'db_broker_pub = db_broker.db_broker_pub:main'
+            'broker = db_broker.db_broker_pub:main'
         ],
     },
 )

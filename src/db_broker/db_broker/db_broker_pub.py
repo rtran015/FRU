@@ -13,6 +13,10 @@ class DB_Broker(Node):
     
     def __init__(self):
         super().__init__('db_broker_pub')
+        self.can_id = 0
+        self.declare_parameter('can_id', self.can_id)
+        self.can_id_timer = self.create_timer(1, self.can_timer_callback)
+
         self.unacked_publish = set() 
         self.status_timer = self.create_timer(10, self.timer_callback)
         self.vesc1_sub = self.create_subscription(Int32MultiArray, 'vesc_pub', self.sensor_update, 10)
@@ -29,6 +33,10 @@ class DB_Broker(Node):
         self.RECONNECT_RATE = 2
         self.MAX_RECONNECT_COUNT = 12
         self.MAX_RECONNECT_DELAY = 60
+    
+    def can_timer_callback(self):
+        self.can_id  = self.get_parameter('can_id').get_parameter_value().integer_value
+
 
     # def on_connect(client, userdata, flags, rc):
     # For paho-mqtt 2.0.0, you need to add the properties parameter.
@@ -91,7 +99,7 @@ class DB_Broker(Node):
         #self.get_logger().info(f'{self.sensorData}')
         client = self.connect_mqtt()
         client.loop_start()
-        ASSET_UID = "823-bzm-4i9-091"
+        ASSET_UID = self.can_id
         message = {
                 "topic": self.topic,
                 "device_asset_uid": ASSET_UID,
