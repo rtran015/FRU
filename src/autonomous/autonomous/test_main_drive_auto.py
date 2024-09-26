@@ -71,7 +71,8 @@ class MainDriveAuto(Node):
         self.bus.send(can_msg)
 
     #Duty 0 is stop, 1-100 is forward, 101-200 is backwards. Time is in ms
-    def drive_for_time(self, right_duty, left_duty, time):
+    def drive_for_time(self, left_duty, right_duty, time):
+        self.in_action = True
         left_data = self.signal_conversion(left_duty, 4, 1000)
         right_data = self.signal_conversion(right_duty, 4, 1000)
         start_time = time.time()
@@ -84,16 +85,15 @@ class MainDriveAuto(Node):
             # hardstop at 3 seconds for safety since we are testing
             if((time.time() - start_time) > 3000):
                 break
+        self.in_action = False
 
     def listener_callback(self, msg):
         # X Button
         if msg.buttons[3] == 1 and not self.in_action:
             #we are philosphers eating rice and the robot is the chopstick
-            self.in_action = True
-
             self.drive_for_time(10, 10, 2000)
 
-            self.in_action = False                
+                
 
 
 def main(args=None):
