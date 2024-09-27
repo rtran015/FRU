@@ -90,8 +90,8 @@ class MainDriveAuto(Node):
 
     def listener_callback(self, msg):
         # X Button
-        if msg.buttons[3] and not self.in_action:
-            #we are philosphers eating rice and the robot is the chopstick
+        if msg.buttons[3]:
+            # we are philosphers eating rice and the robot is the chopstick
             self.drive_for_time(10, 10, 2000)
 
                 
