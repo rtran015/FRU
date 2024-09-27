@@ -6,7 +6,6 @@ import time
 #ignore can import error if it's there, it works if you installed python-can
 import can
 
-
 class MainDriveAuto(Node):
     
     def __init__(self):
@@ -22,8 +21,6 @@ class MainDriveAuto(Node):
         # create can bus link, right now is linked to virtual vcan 0, most likely
         # will be can0 when on the bot
         self.bus = can.interface.Bus(interface='socketcan', channel='can0', bitrate='500000')
-
-        self.in_action = False
     
     # Converts Controller Speed to byte array (decimal form)
     # Alg: signal -> percentage * 1000 (UInt16) -> Hexadecimal Byte Form -> Decimal Byte Form 
@@ -71,12 +68,11 @@ class MainDriveAuto(Node):
         self.bus.send(can_msg)
 
     #Duty 0 is stop, 1-100 is forward, 101-200 is backwards. Time is in ms
-    def drive_for_time(self, left_duty, right_duty, time):
-        self.in_action = True
+    def drive_for_time(self, left_duty, right_duty, time_elapse):
         left_data = self.signal_conversion(left_duty, 4, 1000)
         right_data = self.signal_conversion(right_duty, 4, 1000)
         start_time = time.time()
-        while((time.time() - start_time) < (time / 1000)):
+        while((time.time() - start_time) < (time_elapse / 1000)):
             self.can_publish(15, left_data, True)
             self.can_publish(16, left_data, True)
             self.can_publish(17, right_data, True)
@@ -85,11 +81,16 @@ class MainDriveAuto(Node):
             # hardstop at 3 seconds for safety since we are testing
             if((time.time() - start_time) > 3000):
                 break
-        self.in_action = False
+        stop = self.signal_conversion(0, 4, 1000)
+        self.can_publish(15, stop, True)
+        self.can_publish(16, stop, True)
+        self.can_publish(17, stop, True)
+        self.can_publish(18, stop, True)
+        
 
     def listener_callback(self, msg):
         # X Button
-        if msg.buttons[3] == 1 and not self.in_action:
+        if msg.buttons[3] and not self.in_action:
             #we are philosphers eating rice and the robot is the chopstick
             self.drive_for_time(10, 10, 2000)
 
