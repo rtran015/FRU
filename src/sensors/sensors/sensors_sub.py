@@ -20,13 +20,12 @@ class SensorSub(Node):
         self.bus = can.interface.Bus(interface='socketcan', channel='can0', bitrate='500000', can_filters=filters)
         
         self.vesc1_publisher_ = self.create_publisher(Int32MultiArray, 'vesc_pub', 10) 
-        self.status_timer = self.create_timer(0.001, self.timer_callback)
+        self.status_timer = self.create_timer(0.05, self.timer_callback)
 
     def timer_callback(self):
         self.bus.flush_tx_buffer()
         msg = self.bus.recv()
         # self.get_logger().info(f'Id: {msg.arbitration_id}, Time: {msg.timestamp}, Data: {msg.data}')
-        
         match msg.arbitration_id >> 8:
             case 9:
                 #self.get_logger().info('rpm')

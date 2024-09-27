@@ -77,6 +77,7 @@ class MainDriveAuto(Node):
             self.can_publish(16, left_data, True)
             self.can_publish(17, right_data, True)
             self.can_publish(18, right_data, True)
+            time.sleep(0.1)
 
             # hardstop at 3 seconds for safety since we are testing
             if((time.time() - start_time) > 3000):
@@ -93,10 +94,13 @@ class MainDriveAuto(Node):
         if msg.buttons[3]:
             # we are philosphers eating rice and the robot is the chopstick
             self.drive_for_time(10, 10, 2000)
-
-                
-
-
+            self.drive_for_time(0, 10, 1900)
+            self.drive_for_time(10, 10, 2000)
+            self.drive_for_time(0, 10, 1900)
+            self.drive_for_time(10, 10, 2000)
+            self.drive_for_time(0, 10, 1900)
+            self.drive_for_time(10, 10, 2000)
+            self.drive_for_time(0, 10, 1900)
 def main(args=None):
     print("Main Drive Auto Mode")
     rclpy.init(args=args)

@@ -18,7 +18,7 @@ class DB_Broker(Node):
         self.can_id_timer = self.create_timer(1, self.can_timer_callback)
 
         self.unacked_publish = set() 
-        self.status_timer = self.create_timer(10, self.timer_callback)
+        self.status_timer = self.create_timer(0.05, self.timer_callback)
         self.vesc1_sub = self.create_subscription(Int32MultiArray, 'vesc_pub', self.sensor_update, 10)
         self.sensorData = {2319: [0, 0, 0], 3599: [0, 0, 0, 0], 3855: [0, 0, 0, 0], 4111: [0, 0, 0, 0], 6927: [0, 0, 0, 0]} 
         self.temp = 0

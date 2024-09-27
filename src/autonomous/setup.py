@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'test_drive_auto = autonomous.test_main_drive_auto:main'
+            'auto = autonomous.test_main_drive_auto:main'
         ],
     },
 )
