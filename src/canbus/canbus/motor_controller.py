@@ -4,7 +4,7 @@ import time
 from rclpy.node import Node
 from sensor_msgs.msg import Joy
 from std_msgs.msg import String, UInt8
-from .vesc import Vesc as vesc
+from vesc import Vesc
 
 class motor_controller(Node):
     # remember bit conversions are INT16 - Big Endian (AB)
@@ -35,12 +35,12 @@ class motor_controller(Node):
         msg.data 
 
         if msg.topic == 'dt_l_pub':
-            self.can_publish(self.id_conversion(15, 3), vesc.signal_conversion(msg.data, 4, 1), True)
-            self.can_publish(self.id_conversion(16, 3), msg.data, True)
+            self.can_publish(self.id_conversion(15, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
+            self.can_publish(self.id_conversion(16, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
 
         elif msg.topic == 'dt_r_pub':
-            self.can_publish(self.id_conversion(17, 3), msg.data, True)
-            self.can_publish(self.id_conversion(18, 3), msg.data, True)
+            self.can_publish(self.id_conversion(17, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
+            self.can_publish(self.id_conversion(18, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
 
 def main(args=None):
         rclpy.init(args=args)
