@@ -4,17 +4,17 @@ import time
 from rclpy.node import Node
 from sensor_msgs.msg import Joy
 from std_msgs.msg import String, UInt8
-from vesc import Vesc
+from .vesc import Vesc
 
 class motor_controller(Node):
     # remember bit conversions are INT16 - Big Endian (AB)
     def __init__ (self):
         super().__init__('motor_controller')
         # can bus yipie (switch channel name to 'vcan0' for virtual can testing)
-        self.bus = can.interface.Bus(interface='socketcan', channel='can0', bitrate='500000')
+        self.bus = can.interface.Bus(interface='socketcan', channel='vcan0', bitrate='500000')
         topic_list = {'dt_l_pub', 'dt_r_pub'}
         for topic in topic_list:
-             self.create_subscription = self.create_subscription(
+             self.create_subscription(
                   Joy, 
                   topic,
                   self.listener_callback,
