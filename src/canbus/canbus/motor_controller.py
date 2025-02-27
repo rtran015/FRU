@@ -12,7 +12,7 @@ class motor_controller(Node):
         super().__init__('motor_controller')
         # can bus yipie (switch channel name to 'vcan0' for virtual can testing)
         self.bus = can.interface.Bus(interface='socketcan', channel='vcan0', bitrate='500000')
-        topic_list = {'dt_l_pub', 'dt_r_pub'}
+        topic_list = {'dt_l_pub', 'dt_r_pub', 'dig_pub'}
         for topic in topic_list:
              self.create_subscription(
                   UInt8, 
@@ -22,7 +22,7 @@ class motor_controller(Node):
                   self.listener_callback(msg, topic),
                   10)
              
-    def id_conversion(device_id: int, command_id: int)->int:
+    def id_conversion(self, device_id: int, command_id: int)->int:
         return (command_id << 8) | device_id
 
     def can_publish(self, arbitration_id, data, is_extended_id) -> None:
@@ -34,15 +34,20 @@ class motor_controller(Node):
         self.bus.send(can_msg)    
 
     def listener_callback(self, msg: UInt8, topic: String):
-        msg.data 
+        print(topic, msg.data)
 
-        if msg.topic == 'dt_l_pub':
+        # VESCs
+        if topic == 'dt_l_pub':
             self.can_publish(self.id_conversion(15, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
             self.can_publish(self.id_conversion(16, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
 
-        elif msg.topic == 'dt_r_pub':
+        elif topic == 'dt_r_pub':
             self.can_publish(self.id_conversion(17, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
             self.can_publish(self.id_conversion(18, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
+
+        # STMs
+        elif topic == 'dig_pub':
+            self.can_publish(self.id_conversion(30, 0), Vesc.signal_conversion(msg.data, 4, 1), True)
 
 def main(args=None):
         rclpy.init(args=args)
