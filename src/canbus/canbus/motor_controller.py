@@ -15,9 +15,11 @@ class motor_controller(Node):
         topic_list = {'dt_l_pub', 'dt_r_pub'}
         for topic in topic_list:
              self.create_subscription(
-                  Joy, 
+                  UInt8, 
                   topic,
-                  self.listener_callback,
+                  lambda msg,
+                  topic = topic:
+                  self.listener_callback(msg, topic),
                   10)
              
     def id_conversion(device_id: int, command_id: int)->int:
@@ -31,7 +33,7 @@ class motor_controller(Node):
                 ) 
         self.bus.send(can_msg)    
 
-    def listener_callback(self, msg):
+    def listener_callback(self, msg: UInt8, topic: String):
         msg.data 
 
         if msg.topic == 'dt_l_pub':
