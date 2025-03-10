@@ -12,6 +12,7 @@ class JoyPub(Node):
         self.dig_pub = self.create_publisher(UInt8, 'dig_pub', 10)
         self.subscription = self.create_subscription(Joy, 'joy', self.listener_callback, 10)
         self.bucketSpeed = 0
+
         self.declare_parameters(
             namespace='',
             parameters=[
@@ -56,9 +57,7 @@ class JoyPub(Node):
             self.bucketSpeed += 10
             uint8.data = self.bucketSpeed
             self.dig_pub.publish(uint8)
-
-        
-
+            
 def main():
     print("Controller On")
     rclpy.init(args=None)
