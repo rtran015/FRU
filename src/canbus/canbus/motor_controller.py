@@ -21,33 +21,22 @@ class motor_controller(Node):
                   topic = topic:
                   self.listener_callback(msg, topic),
                   10)
-             
-    def id_conversion(self, device_id: int, command_id: int)->int:
-        return (command_id << 8) | device_id
-
-    def can_publish(self, arbitration_id, data, is_extended_id) -> None:
-        can_msg = can.Message(
-                arbitration_id = arbitration_id,
-                data = data, 
-                is_extended_id = is_extended_id
-                ) 
-        self.bus.send(can_msg)    
 
     def listener_callback(self, msg: UInt8, topic: String):
         print(topic, msg.data)
 
         # VESCs
         if topic == 'dt_l_pub':
-            self.can_publish(self.id_conversion(15, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
-            self.can_publish(self.id_conversion(16, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
+            Vesc.can_publish(Vesc.id_conversion(15, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
+            Vesc.can_publish(Vesc.id_conversion(16, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
 
         elif topic == 'dt_r_pub':
-            self.can_publish(self.id_conversion(17, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
-            self.can_publish(self.id_conversion(18, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
+            Vesc.can_publish(Vesc.id_conversion(17, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
+            Vesc.can_publish(Vesc.id_conversion(18, 3), Vesc.signal_conversion(msg.data, 4, 1), True)
 
         # STMs
         elif topic == 'dig_pub':
-            self.can_publish(self.id_conversion(30, 0), Vesc.signal_conversion(msg.data, 4, 1), True)
+            Vesc.can_publish(Vesc.id_conversion(30, 0), Vesc.signal_conversion(msg.data, 4, 1), True)
 
 def main(args=None):
         rclpy.init(args=args)
