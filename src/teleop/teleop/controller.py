@@ -9,6 +9,7 @@ class JoyPub(Node):
         super().__init__('controller_publisher')
         self.dt_l_pub = self.create_publisher(UInt8, 'dt_l_pub', 10)
         self.dt_r_pub = self.create_publisher(UInt8, 'dt_r_pub', 10)
+        self.ex_2_pub = self.create_publisher(UInt8, 'ex_2_pub', 10)
         self.ex_1_pub = self.create_publisher(UInt8, 'ex_1_pub', 10)
         self.dig_pub = self.create_publisher(UInt8, 'dig_pub', 10)
         self.subscription = self.create_subscription(Joy, 'joy', self.listener_callback, 10)
@@ -22,6 +23,7 @@ class JoyPub(Node):
                 ('speed_limit', None)
             ]
         )
+        self.descendSpeed = 0
         # 100 = no speed
     def listener_callback(self, msg:Joy):
         uint8 = UInt8()
@@ -44,6 +46,12 @@ class JoyPub(Node):
         else:
             uint8.data = 100
             self.dt_r_pub.publish(uint8)
+
+        # Excavation Stage 2 Button
+        if msg.buttons[7] == 1:
+            self.descendSpeed = 30  #placeholder
+            uint8.data = self.descendSpeed
+            self.ex_2_pub.publish(uint8)
 
         if msg.button[5] == 1:
             self.liftspeed += 10
