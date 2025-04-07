@@ -9,6 +9,7 @@ class JoyPub(Node):
         super().__init__('controller_publisher')
         self.dt_l_pub = self.create_publisher(UInt8, 'dt_l_pub', 10)
         self.dt_r_pub = self.create_publisher(UInt8, 'dt_r_pub', 10)
+        self.trap = self.create_publisher(UInt8, 'trap', 10)
         self.ex_2_pub = self.create_publisher(UInt8, 'ex_2_pub', 10)
         self.ex_1_pub = self.create_publisher(UInt8, 'ex_1_pub', 10)
         self.dig_pub = self.create_publisher(UInt8, 'dig_pub', 10)
@@ -47,19 +48,33 @@ class JoyPub(Node):
             uint8.data = 100
             self.dt_r_pub.publish(uint8)
 
-        # Excavation Stage 2 Button
-        if msg.buttons[7] == 1:
-            self.descendSpeed = 30  #placeholder
-            uint8.data = self.descendSpeed
-            self.ex_2_pub.publish(uint8)
+        if msg.buttons[0] == 1:
+            uint8.data = 100    
+            self.trap.publish(uint8)
+        else:
+            uint8.data = 0
+            self.trap.publish(uint0)
+            
+        if msg.buttons[1] == 1:  
+            pass
 
+        if msg.buttons[2] == 1:  
+            pass
+          
+        if msg.buttons[3] == 1:  
+            pass
+            
+        #Button 5 (right bumper)
         if msg.button[5] == 1:
             self.liftspeed += 10
             uint8.data = self.liftspeed
             self.ex_1_pub.publish(uint8)
-
-        #Button 5 (right bumper)
-        #Button 7 (right trigger)
+        
+        # Excavation Stage 2 Button (right trigger)
+        if msg.buttons[7] == 1:
+            self.descendSpeed = 30  #placeholder
+            uint8.data = self.descendSpeed
+            self.ex_2_pub.publish(uint8)
 
         # i don't know if this is correct?
         if msg.buttons[4] == 1: #digging High (Left bumper) 
@@ -67,12 +82,12 @@ class JoyPub(Node):
                 self.bucketSpeed -= 10
                 uint8.data = self.bucketSpeed
             self.dig_pub.publish(uint8)
-        
+    
         if msg.buttons[6] == 1: #digginh low  (Left trigger)
             self.bucketSpeed += 10
             uint8.data = self.bucketSpeed
             self.dig_pub.publish(uint8)
-            
+        
 def main():
     print("Controller On")
     rclpy.init(args=None)
