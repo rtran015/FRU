@@ -9,6 +9,26 @@ from rcl_interfaces.msg import ParameterDescriptor
 class JoyPub(Node):
     def __init__(self):
         super().__init__("controller_publisher")
+        self.declare_parameters(
+            namespace="",
+            parameters=[
+                (
+                    "deadband",
+                    0.05,
+                    ParameterDescriptor(
+                        description="Controls joystick senesitivity to start reading data"
+                    ),
+                ),
+                (
+                    "speed_limit",
+                    1,
+                    ParameterDescriptor(
+                        description="Controls Drive Train max speed (Percentage)"
+                    ),
+                ),
+            ],
+        )
+
         self.dt_l_pub = self.create_publisher(UInt8, "dt_l_pub", 10)
         self.dt_r_pub = self.create_publisher(UInt8, "dt_r_pub", 10)
         self.trap = self.create_publisher(UInt8, "trap", 10)
@@ -18,29 +38,12 @@ class JoyPub(Node):
         self.subscription = self.create_subscription(
             Joy, "joy", self.listener_callback, 10
         )
+
         self.bucketSpeed = 0
         self.liftspeed = 0
-
-        self.declare_parameters(
-            namespace="",
-            parameters=[
-                (
-                    "deadband",
-                    None,
-                    ParameterDescriptor(
-                        description="Controls joystick senesitivity to start reading data"
-                    ),
-                ),
-                (
-                    "speed_limit",
-                    None,
-                    ParameterDescriptor(
-                        description="Controls Drive Train max speed (Percentage)"
-                    ),
-                ),
-            ],
-        )
         self.descendSpeed = 0
+        self.deadband = self.get_parameter("deadband").value
+        self.speed_limit = self.get_parameter("speed_limit").value
 
     def listener_callback(self, msg: Joy):
         uint8 = UInt8()
@@ -88,7 +91,7 @@ class JoyPub(Node):
             self.dig_pub.publish(uint8)
 
         # Button 5 (right bumper)
-        if msg.button[5] == 1:
+        if msg.buttons[5] == 1:
             self.liftspeed += 10
             uint8.data = self.liftspeed
             self.ex_1_pub.publish(uint8)
