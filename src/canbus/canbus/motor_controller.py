@@ -51,28 +51,17 @@ class motor_controller(Node):
     def listener_callback(self, msg: UInt8, topic: String):
         print(topic, msg.data)
 
-        # VESCs
+        # STM32
         if topic == "dt_l_pub":
             self.can_publish(
-                Vesc.id_conversion(15, 3), Vesc.signal_conversion(msg.data, 4, 1), True
-            )
-            self.can_publish(
-                Vesc.id_conversion(16, 3), Vesc.signal_conversion(msg.data, 4, 1), True
+                1, msg.data, True
             )
 
         elif topic == "dt_r_pub":
             self.can_publish(
-                Vesc.id_conversion(17, 3), Vesc.signal_conversion(msg.data, 4, 1), True
+                2, msg.data, True
             )
-            self.can_publish(
-                Vesc.id_conversion(18, 3), Vesc.signal_conversion(msg.data, 4, 1), True
-            )
-
-        # STMs
-        elif topic == "dig_pub":
-            self.can_publish(
-                Vesc.id_conversion(30, 0), Vesc.signal_conversion(msg.data, 4, 1), True
-            )
+           
 
 
 def main(args=None):
