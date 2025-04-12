@@ -61,10 +61,10 @@ class JoyPub(Node):
         # Right Stick Maps - Right Drive Train
         # Don't Touch this either, it works
         # 0-100 is forward, 100-200 is backward
-        if msg.axes[3] > self.deadband:
-            uint8.data = int((msg.axes[3] * self.speed_limit))
-        elif msg.axes[3] < -self.deadband:
-            uint8.data = int((abs(msg.axes[3]) * self.speed_limit) + 100)
+        if msg.axes[4] > self.deadband:
+            uint8.data = int((msg.axes[4] * self.speed_limit))
+        elif msg.axes[4] < -self.deadband:
+            uint8.data = int((abs(msg.axes[4]) * self.speed_limit) + 100)
             uint8.data = 0 if uint8.data == 100 else uint8.data
         else:
             uint8.data = 0  # deadband resets it to neutral
