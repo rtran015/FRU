@@ -54,12 +54,12 @@ class motor_controller(Node):
         # STM32
         if topic == "dt_l_pub":
             self.can_publish(
-                1, msg.data, True
+                Vesc.id_conversion(1, 0), [msg.data], True
             )
 
         elif topic == "dt_r_pub":
             self.can_publish(
-                2, msg.data, True
+                Vesc.id_conversion(2, 0), [msg.data], True
             )
            
 
